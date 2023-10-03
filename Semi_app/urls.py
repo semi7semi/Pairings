@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Tabelka.views import Landing_page
+from Tabelka.views import Landing_page, AddTournament5v5View
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Landing_page.as_view(), name="dashboard"),
+    path('', Landing_page.as_view(), name="index"),
+    path('add_t5v5/', AddTournament5v5View.as_view(), name="add-t5v5")
+
 ]
