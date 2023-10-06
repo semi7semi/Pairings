@@ -2,57 +2,61 @@
 {% block title %} Dashboard {% endblock title %}
 {% block content %}
 <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Turnieje 5v5</h6>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nazwa</th>
-                                        <th scope="col">Gracze</th>
-                                        <th scope="col">Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for tournament in t5v5_list %}
-                                <tr>
-                                    <th scope="row">#</th>
-                                    <td>{{ tournament.name }}</td>
-                                    <td>{{ tournament.player1 }}, {{ tournament.player2 }}, {{ tournament.player3 }}, {{ tournament.player4 }}, {{ tournament.player5 }}</td>
-                                    <td>{{ tournament.date }}</td>
-                                </tr>
-                                {% endfor %}
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Turnieje 5v5</h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Gracze</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for tournament in t5v5_list %}
+                    <tr>
+                        <th scope="row">#</th>
+                        <td>
+                            <a href="{% url 'tournament-view' tournament.id %}">{{ tournament.name }}</a>
+                        </td>
+                        <td>{{ tournament.player1 }}, {{ tournament.player2 }}, {{ tournament.player3 }}, {{
+                            tournament.player4 }}, {{ tournament.player5 }}
+                        </td>
+                        <td>{{ tournament.date }}</td>
+                    </tr>
+                    {% endfor %}
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Turnieje 8v8</h6>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nazwa</th>
-                                        <th scope="col">Gracze</th>
-                                        <th scope="col">Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">#</th>
-                                    <td>ETC 2024</td>
-                                    <td>Gracz 1, Gracz 2..., Gracz 8</td>
-                                    <td>Data</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Turnieje 8v8</h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Gracze</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">#</th>
+                        <td>ETC 2024</td>
+                        <td>Gracz 1, Gracz 2..., Gracz 8</td>
+                        <td>Data</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 <!--            <div class="container-fluid pt-4 px-4">-->
 <!--                <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">-->

@@ -3,8 +3,8 @@ from django.views import View
 from django.views.generic import FormView
 from datetime import datetime
 
-from Tabelka.forms import Tournament5v5Form
-from Tabelka.models import Tournaments5v5
+from Tabelka.forms import Tournament5v5Form, Pairings5Form
+from Tabelka.models import Tournaments5v5, Team_of_5
 
 HELLO_TEXT = "Witaj, dziala!"
 
@@ -19,18 +19,16 @@ class Landing_page(View):
         return render(request, "index.html", ctx)
 
 
-
 class Index(View):
     def get(self, request):
         pass
-
 
 
 class AddTournament5v5View(View):
     def get(self, request):
         form = Tournament5v5Form(initial={"date": datetime.now()})
         ctx = {
-            "form": form
+            "form": form,
         }
         return render(request, "add_tournament5v5.html", ctx)
 
@@ -41,3 +39,49 @@ class AddTournament5v5View(View):
             return redirect("index")
 
 
+class Tournament5v5View(View):
+    def get(selfself, request, id):
+        t = Tournaments5v5.objects.get(pk=id)
+        ctx = {
+            "tournament": t,
+        }
+        return render(request, "tournament5v5.html", ctx)
+
+
+class EditTournament5v5View(View):
+    def get(self, request, id):
+        tournament = Tournaments5v5.objects.get(pk=id)
+        form = Tournament5v5Form(instance=tournament)
+        ctx = {
+            "form": form,
+        }
+        return render(request, "add_tournament5v5.html", ctx)
+
+    def post(self, request, id):
+        tournament = Tournaments5v5.objects.get(pk=id)
+        form = Tournament5v5Form(request.POST, instance=tournament)
+        if form.is_valid():
+            form.save()
+            return redirect("index")
+
+class DeleteTournament5v5View(View):
+    def get(self, request, id):
+        t = Tournaments5v5.objects.get(pk=id)
+        t.delete()
+        return redirect("index")
+
+
+class Pairings5v5View(View):
+    def get(self, request, id):
+        t = Tournaments5v5.objects.get(pk=id)
+        pairings_list = Team_of_5.objects.filter(tournament=t.id)
+        form = Pairings5Form()
+        ctx = {
+            "tournament": t,
+            "pairings_list": pairings_list,
+            "form": form,
+        }
+        return render(request, "pairings5v5.html", ctx)
+
+    def post(self, request, id):
+        pass

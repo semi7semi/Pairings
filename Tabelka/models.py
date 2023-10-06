@@ -20,6 +20,15 @@ ARMIES_CHOICE = (
     ("WDG", "Warriors of the Dark Gods")
 )
 
+PARING_SCORE_CHOICES = (
+    (-3, "-3"),
+    (-2, "-2"),
+    (-1, "-1"),
+    (0, "0"),
+    (1, "1"),
+    (2, "2"),
+    (3, "3")
+)
 
 class Tournaments5v5(models.Model):
     name = models.CharField(max_length=64)
@@ -36,3 +45,37 @@ class Tournaments5v5(models.Model):
     date = models.DateField()
 
     date.editable = True
+
+class Team_of_5(models.Model):
+    name = models.CharField(max_length=64)
+    op1 = models.CharField(max_length=16, choices=ARMIES_CHOICE)
+    op2 = models.CharField(max_length=16, choices=ARMIES_CHOICE)
+    op3 = models.CharField(max_length=16, choices=ARMIES_CHOICE)
+    op4 = models.CharField(max_length=16, choices=ARMIES_CHOICE)
+    op5 = models.CharField(max_length=16, choices=ARMIES_CHOICE)
+    p11 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p12 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p13 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p14 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p15 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p21 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p22 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p23 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p24 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p25 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p31 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p32 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p33 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p34 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p35 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p41 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p42 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p43 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p44 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p45 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p51 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p52 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p53 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p54 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    p55 = models.IntegerField(choices=PARING_SCORE_CHOICES)
+    tournament = models.ForeignKey(Tournaments5v5, on_delete=models.CASCADE, related_name='tourney5')

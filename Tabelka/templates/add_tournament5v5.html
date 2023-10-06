@@ -3,69 +3,120 @@
 {% block content %}
 <!-- Form Start -->
 
-
-            <div class="container-fluid pt-4 px-4">
-                <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
-                    <div class="col-md-6 text-center">
-                            <form action="" method="POST">
-                                {{ form.as_p }}
-                                <input class="btn btn-primary" type="submit" value="Dodaj">
-                                {% csrf_token %}
-                            </form>
-                    </div>
-                </div>
-            </div>
+<!--<div class="container-fluid pt-4 px-4">-->
+<!--    <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">-->
+<!--        <div class="col-md-6 text-center">-->
+<!--            <form action="" method="POST">-->
+<!--                {{ form.as_p }}-->
+<!--                <input class="btn btn-primary" type="submit" value="Dodaj">-->
+<!--                {% csrf_token %}-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Basic Form</h6>
-                            <form>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Dodaj</button>
-                            </form>
-                        </div>
-                    </div>
-                        <div class="col-sm-12 col-xl-6">
-                        <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Select</h6>
-                            <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="form-select mb-3" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
+    <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+        <div class="col-md-6 text-center">
+            <form action="" method="POST">
+                {{ form.non_field_errors }}
+                {{ form.source.errors }}
+                {{ form.source }}
+                    <table class="table">
+                        <tr>
+                            <th class="col">{{ form.name.label_tag }}</th>
+                            <th class="col">{{ form.name }}</th>
+                            <th class="col">{{ form.date.label_tag }}</th>
+                            <th class="col">{{ form.date }}</th>
+                        </tr>
+                        <tr>
+                            <td scope="col">{{ form.player1.label_tag }}</td>
+                            <td scope="col">{{ form.player1 }}</td>
+                            <td scope="col">{{ form.p1.label_tag }}</td>
+                            <td scope="col">{{ form.p1 }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="col">{{ form.player2.label_tag }}</td>
+                            <td scope="col">{{ form.player2 }}</td>
+                            <td scope="col">{{ form.p2.label_tag }}</td>
+                            <td scope="col">{{ form.p2 }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="col">{{ form.player3.label_tag }}</td>
+                            <td scope="col">{{ form.player3 }}</td>
+                            <td scope="col">{{ form.p3.label_tag }}</td>
+                            <td scope="col">{{ form.p3 }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="col">{{ form.player4.label_tag }}</td>
+                            <td scope="col">{{ form.player4 }}</td>
+                            <td scope="col">{{ form.p4.label_tag }}</td>
+                            <td scope="col">{{ form.p4 }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="col">{{ form.player5.label_tag }}</td>
+                            <td scope="col">{{ form.player5 }}</td>
+                            <td scope="col">{{ form.p5.label_tag }}</td>
+                            <td scope="col">{{ form.p5 }}</td>
+                        </tr>
+                    </table>
+                <input class="btn btn-primary" type="submit" value="Zapisz">
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
 </div>
-                </div>
 
-</div>
+<!--<div class="container-fluid pt-4 px-4">-->
+<!--    <div class="row g-4">-->
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="bg-secondary rounded h-100 p-4">-->
+<!--                <h6 class="mb-4">Basic Form</h6>-->
+<!--                <form>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="exampleInputEmail1" class="form-label">Email address</label>-->
+<!--                        <input type="email" class="form-control" id="exampleInputEmail1"-->
+<!--                               aria-describedby="emailHelp">-->
+<!--                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="exampleInputPassword1" class="form-label">Password</label>-->
+<!--                        <input type="password" class="form-control" id="exampleInputPassword1">-->
+<!--                    </div>-->
+<!--                    <div class="mb-3 form-check">-->
+<!--                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--                        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-primary">Dodaj</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="bg-secondary rounded h-100 p-4">-->
+<!--                <h6 class="mb-4">Select</h6>-->
+<!--                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example">-->
+<!--                    <option selected>Open this select menu</option>-->
+<!--                    <option value="1">One</option>-->
+<!--                    <option value="2">Two</option>-->
+<!--                    <option value="3">Three</option>-->
+<!--                </select>-->
+<!--                <select class="form-select mb-3" aria-label="Default select example">-->
+<!--                    <option selected>Open this select menu</option>-->
+<!--                    <option value="1">One</option>-->
+<!--                    <option value="2">Two</option>-->
+<!--                    <option value="3">Three</option>-->
+<!--                </select>-->
+<!--                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">-->
+<!--                    <option selected>Open this select menu</option>-->
+<!--                    <option value="1">One</option>-->
+<!--                    <option value="2">Two</option>-->
+<!--                    <option value="3">Three</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
 
 {% endblock content %}
