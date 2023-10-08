@@ -41,11 +41,30 @@ class AddTournament5v5View(View):
 
 class Tournament5v5View(View):
     def get(selfself, request, id):
-        t = Tournaments5v5.objects.get(pk=id)
+        tournament = Tournaments5v5.objects.get(pk=id)
+        pairings_list = Team_of_5.objects.filter(tournament=tournament.id)
+        form = Pairings5Form()
         ctx = {
-            "tournament": t,
+            "tournament": tournament,
+            "pairings_list": pairings_list,
+            "form": form,
         }
         return render(request, "tournament5v5.html", ctx)
+
+    def post(self, request, id):
+        tournament = Tournaments5v5.objects.get(pk=id)
+        form = Pairings5Form(request.POST)
+        print("import")
+        if form.is_valid():
+            result = form.save(commit=False)
+            print("commit")
+            result.tournament = tournament
+            print("t")
+            result.save()
+            print("t.save")
+            return redirect("tournament-view", id=id)
+        else:
+            return redirect("index")
 
 
 class EditTournament5v5View(View):
@@ -69,19 +88,3 @@ class DeleteTournament5v5View(View):
         t = Tournaments5v5.objects.get(pk=id)
         t.delete()
         return redirect("index")
-
-
-class Pairings5v5View(View):
-    def get(self, request, id):
-        t = Tournaments5v5.objects.get(pk=id)
-        pairings_list = Team_of_5.objects.filter(tournament=t.id)
-        form = Pairings5Form()
-        ctx = {
-            "tournament": t,
-            "pairings_list": pairings_list,
-            "form": form,
-        }
-        return render(request, "pairings5v5.html", ctx)
-
-    def post(self, request, id):
-        pass

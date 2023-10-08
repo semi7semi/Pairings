@@ -1,6 +1,5 @@
 from django.db import models
 
-
 ARMIES_CHOICE = (
     ("BH", "Beast Herds"),
     ("DL", "Demonic Legion"),
@@ -30,6 +29,7 @@ PARING_SCORE_CHOICES = (
     (3, "3")
 )
 
+
 class Tournaments5v5(models.Model):
     name = models.CharField(max_length=64)
     player1 = models.CharField(max_length=64)
@@ -45,6 +45,7 @@ class Tournaments5v5(models.Model):
     date = models.DateField()
 
     date.editable = True
+
 
 class Team_of_5(models.Model):
     name = models.CharField(max_length=64)

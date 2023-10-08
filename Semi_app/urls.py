@@ -17,16 +17,15 @@ from django.contrib import admin
 from django.urls import path
 
 from Tabelka.views import Landing_page, AddTournament5v5View, EditTournament5v5View, DeleteTournament5v5View, \
-    Pairings5v5View, Tournament5v5View
+     Tournament5v5View
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Landing_page.as_view(), name="index"),
-    path('add_t5v5/', AddTournament5v5View.as_view(), name="add-t5v5"),
-    path('edit_t5v5/<int:id>/', EditTournament5v5View.as_view(), name="edit-t5v5"),
-    path('delete/<int:id>/', DeleteTournament5v5View.as_view(), name="delete-5v5"),
+    path('t5v5/add/', AddTournament5v5View.as_view(), name="add-5v5"),
     path('t5v5/<int:id>/', Tournament5v5View.as_view(), name="tournament-view"),
+    path('t5v5/edit/<int:id>/', EditTournament5v5View.as_view(), name="edit-5v5"),
+    path('t5v5/delete/<int:id>/', DeleteTournament5v5View.as_view(), name="delete-5v5"),
 
-    path('t5v5/<int:id>/', Pairings5v5View.as_view(), name="pairing-5v5"),
 
 ]
