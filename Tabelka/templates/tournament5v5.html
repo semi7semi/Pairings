@@ -69,7 +69,9 @@
                     {% for pairing in pairings_list %}
                     <tr>
                         <th scope="row">#</th>
-                        <td>{{ pairing.name }}</td>
+                        <td>
+                            <a href="{% url 'pairing5v5-view' tournament.id pairing.id %}">{{ pairing.name }}</a>
+                            </td>
                         <td>{{ pairing.op1 }}, {{ pairing.op2 }}, {{ pairing.op3 }},
                             {{ pairing.op4 }}, {{ pairing.op5 }},</td>
                     </tr>

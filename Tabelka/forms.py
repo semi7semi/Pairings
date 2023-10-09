@@ -46,7 +46,12 @@ class Pairings5Form(forms.ModelForm):
             self.fields[i].initial = 0
     class Meta:
         model = Team_of_5
-        fields = ["name", "op1", "op2", "op3", "op4", "op5", "p11", "p12", "p13", "p14", "p15", "p21", "p22", "p23", "p24", "p25", "p31", "p32", "p33", "p34", "p35", "p41", "p42", "p43", "p44", "p45", "p51", "p52", "p53", "p54", "p55"]
+        fields = ["name", "op1", "op2", "op3", "op4", "op5",
+                  "p11", "p12", "p13", "p14", "p15",
+                  "p21", "p22", "p23", "p24", "p25",
+                  "p31", "p32", "p33", "p34", "p35",
+                  "p41", "p42", "p43", "p44", "p45",
+                  "p51", "p52", "p53", "p54", "p55"]
         labels = {
             "name": "Przeciw komu?",
             "op1": "Przeciwnik 1",

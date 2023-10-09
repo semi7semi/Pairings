@@ -2,15 +2,69 @@
 {% block title %} Dashboard {% endblock title %}
 {% block content %}
 <div class="container-fluid pt-4 px-4">
-    <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
-        <div class="col-md-6 text-center">
-            <form action="" method="POST">
-                {{ form.as_p }}
-                <input class="btn btn-primary" type="submit" value="Dodaj">
-                {% csrf_token %}
-            </form>
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">{{ tournament.name }} - Paring: {{ pairing.name}}</h6>
+                <table class="table">
+                    <thead>
+
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Op1 - {{ pairing.op1 }}</th>
+                        <th scope="col">Op2 - {{ pairing.op2 }}</th>
+                        <th scope="col">Op3 - {{ pairing.op3 }}</th>
+                        <th scope="col">Op4 - {{ pairing.op4 }}</th>
+                        <th scope="col">Op5 - {{ pairing.op5 }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{ tournament.player1 }} - {{ tournament.p1 }}</th>
+                        <td>{{  pairing.p11 }}</td>
+                        <td>{{  pairing.p12 }}</td>
+                        <td>{{  pairing.p13 }}</td>
+                        <td>{{  pairing.p14 }}</td>
+                        <td>{{  pairing.p15 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ tournament.player2 }} - {{ tournament.p2 }}</th>
+                        <td>{{  pairing.p21 }}</td>
+                        <td>{{  pairing.p22 }}</td>
+                        <td>{{  pairing.p23 }}</td>
+                        <td>{{  pairing.p24 }}</td>
+                        <td>{{  pairing.p25 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ tournament.player3 }} - {{ tournament.p3 }}</th>
+                        <td>{{  pairing.p31 }}</td>
+                        <td>{{  pairing.p32 }}</td>
+                        <td>{{  pairing.p33 }}</td>
+                        <td>{{  pairing.p34 }}</td>
+                        <td>{{  pairing.p35 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ tournament.player4 }} - {{ tournament.p4 }}</th>
+                        <td>{{  pairing.p41 }}</td>
+                        <td>{{  pairing.p42 }}</td>
+                        <td>{{  pairing.p43 }}</td>
+                        <td>{{  pairing.p44 }}</td>
+                        <td>{{  pairing.p45 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ tournament.player5 }} - {{ tournament.p5 }}</th>
+                        <td>{{  pairing.p51 }}</td>
+                        <td>{{  pairing.p52 }}</td>
+                        <td>{{  pairing.p53 }}</td>
+                        <td>{{  pairing.p54 }}</td>
+                        <td>{{  pairing.p55 }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
 </div>
 
 {% endblock content %}
