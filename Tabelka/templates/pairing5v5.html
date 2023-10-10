@@ -16,48 +16,56 @@
                         <th scope="col">Op3 - {{ pairing.op3 }}</th>
                         <th scope="col">Op4 - {{ pairing.op4 }}</th>
                         <th scope="col">Op5 - {{ pairing.op5 }}</th>
+                        <th scope="col">suma</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <th scope="row">{{ tournament.player1 }} - {{ tournament.p1 }}</th>
-                        <td>{{  pairing.p11 }}</td>
-                        <td>{{  pairing.p12 }}</td>
-                        <td>{{  pairing.p13 }}</td>
-                        <td>{{  pairing.p14 }}</td>
-                        <td>{{  pairing.p15 }}</td>
+                        {% for i in tab_pairing_points.0.0 %}
+                        <td>{{ i }}</td>
+                        {% endfor %}
+                        <td>{{ tab_pairing_points.0.1 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">{{ tournament.player2 }} - {{ tournament.p2 }}</th>
-                        <td>{{  pairing.p21 }}</td>
-                        <td>{{  pairing.p22 }}</td>
-                        <td>{{  pairing.p23 }}</td>
-                        <td>{{  pairing.p24 }}</td>
-                        <td>{{  pairing.p25 }}</td>
+                        {% for i in tab_pairing_points.1.0 %}
+                        <td>{{ i }}</td>
+                        {% endfor %}
+                        <td>{{ tab_pairing_points.1.1 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">{{ tournament.player3 }} - {{ tournament.p3 }}</th>
-                        <td>{{  pairing.p31 }}</td>
-                        <td>{{  pairing.p32 }}</td>
-                        <td>{{  pairing.p33 }}</td>
-                        <td>{{  pairing.p34 }}</td>
-                        <td>{{  pairing.p35 }}</td>
+                        {% for i in tab_pairing_points.2.0 %}
+                        <td>{{ i }}</td>
+                        {% endfor %}
+                        <td>{{ tab_pairing_points.2.1 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">{{ tournament.player4 }} - {{ tournament.p4 }}</th>
-                        <td>{{  pairing.p41 }}</td>
-                        <td>{{  pairing.p42 }}</td>
-                        <td>{{  pairing.p43 }}</td>
-                        <td>{{  pairing.p44 }}</td>
-                        <td>{{  pairing.p45 }}</td>
+                        {% for i in tab_pairing_points.3.0 %}
+                        <td>{{ i }}</td>
+                        {% endfor %}
+                        <td>{{ tab_pairing_points.3.1 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">{{ tournament.player5 }} - {{ tournament.p5 }}</th>
-                        <td>{{  pairing.p51 }}</td>
-                        <td>{{  pairing.p52 }}</td>
-                        <td>{{  pairing.p53 }}</td>
-                        <td>{{  pairing.p54 }}</td>
-                        <td>{{  pairing.p55 }}</td>
+                        {% for i in tab_pairing_points.4.0 %}
+                        <td>{{ i }}</td>
+                        {% endfor %}
+                        <td>{{ tab_pairing_points.4.1 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Suma</th>
+                        {% for col in tab_col_points %}
+                        {% if col == 0 %}
+                        <td>{{ col }}</td>
+                        {% elif col < 0  %}
+                        <td class="text-danger">{{ col }}</td>
+                        {% elif col > 0 %}
+                        <td class="text-success">{{ col }}</td>
+                        {% endif %}
+                        {% endfor %}
                     </tr>
                     </tbody>
                 </table>
