@@ -56,7 +56,7 @@
                     <!--                    <button type="button" class="btn btn-dark m-2">Dark</button>-->
                     <!--                    <button type="button" class="btn btn-link m-2">Link</button>-->
                 </div>
-<!--                lista paringow -->
+                <!--                lista paringow -->
                 <table class="table">
                     <thead>
                     <tr>
@@ -71,16 +71,15 @@
                         <th scope="row">#</th>
                         <td>
                             <a href="{% url 'pairing5v5-view' tournament.id pairing.id %}">{{ pairing.name }}</a>
-                            </td>
+                        </td>
                         <td>{{ pairing.op1 }}, {{ pairing.op2 }}, {{ pairing.op3 }},
-                            {{ pairing.op4 }}, {{ pairing.op5 }},</td>
+                            {{ pairing.op4 }}, {{ pairing.op5 }},
+                        </td>
                     </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-
             </div>
-
         </div>
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary rounded h-100 p-4">

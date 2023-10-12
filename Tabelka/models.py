@@ -29,6 +29,8 @@ PARING_SCORE_CHOICES = (
     (3, "3")
 )
 
+class Armys(models.Model):
+    army = models.CharField(max_length=16, choices=ARMIES_CHOICE)
 
 class Tournaments5v5(models.Model):
     name = models.CharField(max_length=64)

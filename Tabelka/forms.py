@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tournaments5v5, Team_of_5
+from .models import Tournaments5v5, Team_of_5, Armys
 
 
 class Tournament5v5Form(forms.ModelForm):
@@ -93,3 +93,9 @@ class Pairings5Form(forms.ModelForm):
             "p54": forms.Select(attrs={"class": "form-select mb-3"}),
             "p55": forms.Select(attrs={"class": "form-select mb-3"}),
         }
+class FirstPairingForm(forms.Form):
+    first_p1 = forms.ModelChoiceField(queryset=Armys.objects.all(), label="Wystawka", widget=forms.Select(attrs={"class": "form-select mb-3"}))
+    first_op1 = forms.ModelChoiceField(queryset=Armys.objects.all(), label="Dostawka przeciwników", widget=forms.Select(attrs={"class": "form-select mb-3"}))
+    first_p2 = forms.ModelChoiceField(queryset=Armys.objects.all(), label="Dostawka", widget=forms.Select(attrs={"class": "form-select mb-3"}))
+    first_op2 = forms.ModelChoiceField(queryset=Armys.objects.all(), label="Wystawka przeciwników", widget=forms.Select(attrs={"class": "form-select mb-3"}))
+

@@ -60,7 +60,7 @@
                         {% for col in tab_col_points %}
                         {% if col == 0 %}
                         <td>{{ col }}</td>
-                        {% elif col < 0  %}
+                        {% elif col < 0 %}
                         <td class="text-danger">{{ col }}</td>
                         {% elif col > 0 %}
                         <td class="text-success">{{ col }}</td>
@@ -71,8 +71,33 @@
                 </table>
             </div>
         </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <form action="" method="POST">
+                    {{ form.non_field_errors }}
+                    {{ form.source.errors }}
+                    {{ form.source }}
+                    <table class="table">
+                        <tr>
+                            <th class="col">{{ form.first_p1.label_tag }}</th>
+                            <th class="col">{{ form.first_p1 }}</th>
+                            <th class="col">{{ form.first_op1.label_tag }}</th>
+                            <th class="col">{{ form.first_op1 }}</th>
+                        </tr>
+                        <tr>
+                            <th class="col">{{ form.first_p2.label_tag }}</th>
+                            <th class="col">{{ form.first_p2 }}</th>
+                            <th class="col">{{ form.first_op2.label_tag }}</th>
+                            <th class="col">{{ form.first_op2 }}</th>
+                        </tr>
+                    </table>
+                    <input class="btn btn-primary" type="submit" value="Paruj">
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
     </div>
-
 </div>
+
 
 {% endblock content %}

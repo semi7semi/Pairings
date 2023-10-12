@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import FormView
 from datetime import datetime
 
-from Tabelka.forms import Tournament5v5Form, Pairings5Form
+from Tabelka.forms import Tournament5v5Form, Pairings5Form, FirstPairingForm
 from Tabelka.models import Tournaments5v5, Team_of_5
 
 HELLO_TEXT = "Witaj, dziala!"
@@ -89,8 +89,7 @@ class Pairing5v5View(View):
     def get(self, request, id, p_id):
         tournament = Tournaments5v5.objects.get(pk=id)
         pairing = Team_of_5.objects.get(pk=p_id)
-        teamA = [tournament.p1, tournament.p2, tournament.p3, tournament.p4, tournament.p5]
-        teamB = [pairing.op1, pairing.op2, pairing.op3, pairing.op4, pairing.op5]
+        form = FirstPairingForm()
         p1 = [pairing.p11, pairing.p12, pairing.p13, pairing.p14, pairing.p15]
         p2 = [pairing.p21, pairing.p22, pairing.p23, pairing.p24, pairing.p25]
         p3 = [pairing.p31, pairing.p32, pairing.p33, pairing.p34, pairing.p35]
@@ -126,5 +125,35 @@ class Pairing5v5View(View):
             "pairing": pairing,
             "tab_pairing_points": tab_pairing_points,
             "tab_col_points": tab_col_points,
+            "form": form,
         }
         return render(request, "pairing5v5.html", ctx)
+
+    def post(self, request, id, p_id):
+        tournament = Tournaments5v5.objects.get(pk=id)
+        pairing = Team_of_5.objects.get(pk=p_id)
+        teamA = [tournament.p1, tournament.p2, tournament.p3, tournament.p4, tournament.p5]
+        teamB = [pairing.op1, pairing.op2, pairing.op3, pairing.op4, pairing.op5]
+        form = FirstPairingForm(request.POST)
+        if form.is_valid():
+            first_p1 = form.cleaned_data["first_p1"]
+            first_op1 = form.cleaned_data["first_op1"]
+            first_p2 = form.cleaned_data["first_p2"]
+            first_op2 = form.cleaned_data["first_op2"]
+            print(first_p1)
+            # # do usuwania kolumn
+            # n1 = teamA.index(first_p1) + 1
+            # n2 = teamA.index(first_p2) + 1
+            # no1 = teamB.index(first_op1) + 1
+            # no2 = teamB.index(first_op2) + 1
+            # teamBpost = teamB.copy()
+            # teamBpost.remove(first_op1)
+            # teamBpost.remove(first_op2)
+            # teamApost = teamA.copy()
+            # teamApost.remove(first_p1)
+            # teamApost.remove(first_p2)
+            ctx = {
+                "tournament": tournament,
+                "pairing": pairing,
+            }
+            return render(request, "pairing5v5.html", ctx)
