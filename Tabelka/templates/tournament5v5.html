@@ -62,7 +62,9 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Przeciw komu</th>
-                        <th scope="col">data...</th>
+                        <th scope="col">Armie przeciwników</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -74,6 +76,16 @@
                         </td>
                         <td>{{ pairing.op1 }}, {{ pairing.op2 }}, {{ pairing.op3 }},
                             {{ pairing.op4 }}, {{ pairing.op5 }},
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary m-2">
+                                <a class="" href="{% url 'edit-pairing5v5' tournament.id pairing.id %}">Edytuj</a>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger m-2">
+                                <a class="" href="{% url 'delete-pairing5v5' tournament.id pairing.id %}">Usuń</a>
+                            </button>
                         </td>
                     </tr>
                     {% endfor %}

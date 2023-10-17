@@ -1,3 +1,5 @@
+from itertools import permutations
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import FormView
@@ -118,7 +120,39 @@ class Pairing5v5View(View):
             [p5, sum_p5],
         ]
         tab_col_points = [sum_col1, sum_col2, sum_col3, sum_col4, sum_col5]
-
+        teamA = [tournament.p1, tournament.p2, tournament.p3, tournament.p4, tournament.p5]
+        teamB = [pairing.op1, pairing.op2, pairing.op3, pairing.op4, pairing.op5]
+        all_pairings = []
+        data_list = []
+        for perm in permutations(teamA):
+            all_pairings.append(list(zip(perm, teamB)))
+        for one_set in all_pairings:
+            total = 0
+            for i in one_set:
+                # i = pairing.p11 ...
+                for A in teamA:
+                    for B in teamB:
+                        if i == (A, B):
+                            x = teamA.index(A) + 1
+                            y = teamB.index(B) + 1
+                            attr = f"p{x}{y}"
+                            j = getattr(pairing, attr)
+                total += j
+            data_list.append([one_set, total])
+        green = 0
+        yellow = 0
+        red = 0
+        for i in data_list:
+            if i[1] > 1:
+                green += 1
+            elif i[1] < -1:
+                red += 1
+            else:
+                yellow += 1
+        total = green + yellow + red
+        green_p = green / total * 100
+        yellow_p = yellow / total * 100
+        red_p = red / total * 100
 
         ctx = {
             "tournament": tournament,
@@ -126,6 +160,13 @@ class Pairing5v5View(View):
             "tab_pairing_points": tab_pairing_points,
             "tab_col_points": tab_col_points,
             "form": form,
+            "green": green,
+            "yellow": yellow,
+            "red": red,
+            "green_p": green_p,
+            "yellow_p": yellow_p,
+            "red_p": red_p,
+            "total": total,
         }
         return render(request, "pairing5v5.html", ctx)
 
@@ -140,7 +181,7 @@ class Pairing5v5View(View):
             first_op1 = form.cleaned_data["first_op1"]
             first_p2 = form.cleaned_data["first_p2"]
             first_op2 = form.cleaned_data["first_op2"]
-            print(first_p1)
+
             # # do usuwania kolumn
             # n1 = teamA.index(first_p1) + 1
             # n2 = teamA.index(first_p2) + 1
@@ -155,5 +196,47 @@ class Pairing5v5View(View):
             ctx = {
                 "tournament": tournament,
                 "pairing": pairing,
+                "first_p1": first_p1,
+                "first_op1": first_op1,
+                "first_p2": first_p2,
+                "first_op2": first_op2,
             }
             return render(request, "pairing5v5.html", ctx)
+
+
+class EditPairing5v5View(View):
+    def get(self, request, id, p_id):
+        tournament = Tournaments5v5.objects.get(pk=id)
+        pairing = Team_of_5.objects.get(pk=p_id)
+        pairing_list = Team_of_5.objects.filter(tournament=tournament.id)
+        form = Pairings5Form(instance=pairing)
+        ctx = {
+            "tournament": tournament,
+            "form": form,
+            "pairing_list": pairing_list,
+        }
+        return render(request, "tournament5v5.html")
+
+    def post(self, request, id, p_id):
+        tournament = Tournaments5v5.objects.get(pk=id)
+        pairing = Team_of_5.objects.get(pk=p_id)
+        form = Pairings5Form(instance=pairing)
+        if form.is_valid():
+            result = form.save(commit=False)
+            result.tournament = tournament
+            result.save()
+            return redirect("pairing5v5-view", id=id, p_id=p_id)
+        else:
+            return redirect("index")
+
+class DeletePairing5v5View(View):
+    def get(self, request, id, p_id):
+        p = Team_of_5.objects.get(pk=p_id)
+        p.delete()
+        return redirect("tournament-view", id=id)
+
+
+
+
+
+

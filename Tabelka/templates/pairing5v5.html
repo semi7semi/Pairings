@@ -96,6 +96,39 @@
                 </form>
             </div>
         </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Mozliwych parowań ({{ total }})</h6>
+                <table class="table table-borderless">
+                    <tr>
+                        <th class="text-success"> Dobrych parowań: {{ green_p|stringformat:"d%%" }} ({{ green }})</th>
+                    </tr>
+                    <tr>
+                        <th class="text-warning"> Neutralnych parowań: {{ yellow_p|stringformat:"d%%" }} ({{ yellow }})</th>
+                    </tr>
+                    <tr>
+                        <th class="text-danger"> Złych parowań: {{ red_p|stringformat:"d%%" }} ({{ red }})</th>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <table class="table table-borderless">
+                    <tr>
+                        <th class="text-success"> 52-100 pkt</th>
+                    </tr>
+                    <tr>
+                        <th class="text-warning"> 49-51 pkt</th>
+                    </tr>
+                    <tr>
+                        <th class="text-danger"> 0-48 pkt</th>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
     </div>
 </div>
 
