@@ -208,19 +208,17 @@ class EditPairing5v5View(View):
     def get(self, request, id, p_id):
         tournament = Tournaments5v5.objects.get(pk=id)
         pairing = Team_of_5.objects.get(pk=p_id)
-        pairing_list = Team_of_5.objects.filter(tournament=tournament.id)
         form = Pairings5Form(instance=pairing)
         ctx = {
             "tournament": tournament,
             "form": form,
-            "pairing_list": pairing_list,
         }
-        return render(request, "tournament5v5.html")
+        return render(request, "pairing5v5_edit.html", ctx)
 
     def post(self, request, id, p_id):
         tournament = Tournaments5v5.objects.get(pk=id)
         pairing = Team_of_5.objects.get(pk=p_id)
-        form = Pairings5Form(instance=pairing)
+        form = Pairings5Form(request.POST, instance=pairing)
         if form.is_valid():
             result = form.save(commit=False)
             result.tournament = tournament

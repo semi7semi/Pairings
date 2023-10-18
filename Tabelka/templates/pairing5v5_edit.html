@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %} Dashboard {% endblock title %}
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <form action="" method="POST">
+                    {{ form.non_field_errors }}
+                    {{ form.source.errors }}
+                    {{ form.source }}
+                    <table class="table">
+                        <tr>
+                            <th class="col">{{ form.name.label_tag }}</th>
+                            <th class="col">{{ form.name }}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th scope="col">{{ form.op1.label_tag }}</th>
+                            <th scope="col">{{ form.op2.label_tag }}</th>
+                            <th scope="col">{{ form.op3.label_tag }}</th>
+                            <th scope="col">{{ form.op4.label_tag }}</th>
+                            <th scope="col">{{ form.op5.label_tag }}</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td scope="col">{{ form.op1 }} {{ form.op1.errors }}</td>
+                            <td scope="col">{{ form.op2 }} {{ form.op2.errors }}</td>
+                            <td scope="col">{{ form.op3 }} {{ form.op3.errors }}</td>
+                            <td scope="col">{{ form.op4 }} {{ form.op4.errors }}</td>
+                            <td scope="col">{{ form.op5 }} {{ form.op5.errors }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ tournament.player1 }} - {{ tournament.p1 }}</th>
+                            <td scope="col">{{ form.p11 }} {{ form.p11.errors }}</td>
+                            <td scope="col">{{ form.p12 }} {{ form.p12.errors }}</td>
+                            <td scope="col">{{ form.p13 }} {{ form.p13.errors }}</td>
+                            <td scope="col">{{ form.p14 }} {{ form.p14.errors }}</td>
+                            <td scope="col">{{ form.p15 }} {{ form.p15.errors }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ tournament.player2 }} - {{ tournament.p2 }}</th>
+                            <td scope="col">{{ form.p21 }} {{ form.p21.errors }}</td>
+                            <td scope="col">{{ form.p22 }} {{ form.p22.errors }}</td>
+                            <td scope="col">{{ form.p23 }} {{ form.p23.errors }}</td>
+                            <td scope="col">{{ form.p24 }} {{ form.p24.errors }}</td>
+                            <td scope="col">{{ form.p25 }} {{ form.p25.errors }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ tournament.player3 }} - {{ tournament.p3 }}</th>
+                            <td scope="col">{{ form.p31 }} {{ form.p31.errors }}</td>
+                            <td scope="col">{{ form.p32 }} {{ form.p32.errors }}</td>
+                            <td scope="col">{{ form.p33 }} {{ form.p33.errors }}</td>
+                            <td scope="col">{{ form.p34 }} {{ form.p34.errors }}</td>
+                            <td scope="col">{{ form.p35 }} {{ form.p35.errors }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ tournament.player4 }} - {{ tournament.p4 }}</th>
+                            <td scope="col">{{ form.p41 }} {{ form.p41.errors }}</td>
+                            <td scope="col">{{ form.p42 }} {{ form.p42.errors }}</td>
+                            <td scope="col">{{ form.p43 }} {{ form.p43.errors }}</td>
+                            <td scope="col">{{ form.p44 }} {{ form.p44.errors }}</td>
+                            <td scope="col">{{ form.p45 }} {{ form.p45.errors }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ tournament.player5 }} - {{ tournament.p5 }}</th>
+                            <td scope="col">{{ form.p51 }} {{ form.p51.errors }}</td>
+                            <td scope="col">{{ form.p52 }} {{ form.p52.errors }}</td>
+                            <td scope="col">{{ form.p53 }} {{ form.p53.errors }}</td>
+                            <td scope="col">{{ form.p54 }} {{ form.p54.errors }}</td>
+                            <td scope="col">{{ form.p55 }} {{ form.p55.errors }}</td>
+                        </tr>
+                    </table>
+                    <input class="btn btn-primary" type="submit" value="Zapisz nowy paring">
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
