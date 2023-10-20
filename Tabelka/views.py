@@ -181,18 +181,53 @@ class Pairing5v5View(View):
             first_op1 = form.cleaned_data["first_op1"]
             first_p2 = form.cleaned_data["first_p2"]
             first_op2 = form.cleaned_data["first_op2"]
+            # usuwanie sparowanych
+            n1 = teamA.index(first_p1) + 1
+            n2 = teamA.index(first_p2) + 1
+            no1 = teamB.index(first_op1) + 1
+            no2 = teamB.index(first_op2) + 1
+            teamA2 = teamA.copy()
+            teamA2.remove(first_p1)
+            teamA2.remove(first_p2)
+            teamB2 = teamB.copy()
+            teamB2.remove(first_op1)
+            teamB2.remove(first_op2)
 
-            # # do usuwania kolumn
-            # n1 = teamA.index(first_p1) + 1
-            # n2 = teamA.index(first_p2) + 1
-            # no1 = teamB.index(first_op1) + 1
-            # no2 = teamB.index(first_op2) + 1
-            # teamBpost = teamB.copy()
-            # teamBpost.remove(first_op1)
-            # teamBpost.remove(first_op2)
-            # teamApost = teamA.copy()
-            # teamApost.remove(first_p1)
-            # teamApost.remove(first_p2)
+            print(teamA2)
+            print(teamB2)
+
+            all_pairings = []
+            data_list = []
+            for perm in permutations(teamA2):
+                all_pairings.append(list(zip(perm, teamB2)))
+            for one_set in all_pairings:
+                total = 0
+                for i in one_set:
+                    # i = pairing.p11 ...
+                    for A in teamA2:
+                        for B in teamB2:
+                            if i == (A, B):
+                                x = teamA.index(A) + 1
+                                y = teamB.index(B) + 1
+                                attr = f"p{x}{y}"
+                                j = getattr(pairing, attr)
+                    total += j
+                data_list.append([one_set, total])
+            green = 0
+            yellow = 0
+            red = 0
+            for i in data_list:
+                if i[1] > 1:
+                    green += 1
+                elif i[1] < -1:
+                    red += 1
+                else:
+                    yellow += 1
+            total = green + yellow + red
+            green_p = green / total * 100
+            yellow_p = yellow / total * 100
+            red_p = red / total * 100
+
             ctx = {
                 "tournament": tournament,
                 "pairing": pairing,
@@ -200,6 +235,13 @@ class Pairing5v5View(View):
                 "first_op1": first_op1,
                 "first_p2": first_p2,
                 "first_op2": first_op2,
+                "green": green,
+                "yellow": yellow,
+                "red": red,
+                "green_p": green_p,
+                "yellow_p": yellow_p,
+                "red_p": red_p,
+                "total": total,
             }
             return render(request, "pairing5v5.html", ctx)
 
