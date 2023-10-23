@@ -1,3 +1,4 @@
+import json
 from itertools import permutations
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -153,6 +154,7 @@ class Pairing5v5View(View):
         green_p = green / total * 100
         yellow_p = yellow / total * 100
         red_p = red / total * 100
+        # data = [green_p, yellow_p, red_p]
 
         ctx = {
             "tournament": tournament,
@@ -167,6 +169,7 @@ class Pairing5v5View(View):
             "yellow_p": yellow_p,
             "red_p": red_p,
             "total": total,
+            # "data": json.dumps(data),
         }
         return render(request, "pairing5v5.html", ctx)
 
@@ -193,8 +196,6 @@ class Pairing5v5View(View):
             teamB2.remove(first_op1)
             teamB2.remove(first_op2)
 
-            print(teamA2)
-            print(teamB2)
 
             all_pairings = []
             data_list = []
@@ -242,6 +243,8 @@ class Pairing5v5View(View):
                 "yellow_p": yellow_p,
                 "red_p": red_p,
                 "total": total,
+                "teamA2": teamA2,
+                "teamB2": teamB2,
             }
             return render(request, "pairing5v5.html", ctx)
 

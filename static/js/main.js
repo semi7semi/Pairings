@@ -190,16 +190,14 @@
     var myChart6 = new Chart(ctx6, {
         type: "doughnut",
         data: {
-            labels: ["Italy", "France", "Spain", "USA", "Argentina"],
+            labels: ["Green", "Yellow", "Red"],
             datasets: [{
                 backgroundColor: [
                     "rgba(235, 22, 22, .7)",
                     "rgba(235, 22, 22, .6)",
                     "rgba(235, 22, 22, .5)",
-                    "rgba(235, 22, 22, .4)",
-                    "rgba(235, 22, 22, .3)"
                 ],
-                data: [55, 49, 44, 24, 15]
+                data: [1, 3, 5]
             }]
         },
         options: {
