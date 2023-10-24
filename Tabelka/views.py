@@ -93,34 +93,31 @@ class Pairing5v5View(View):
         tournament = Tournaments5v5.objects.get(pk=id)
         pairing = Team_of_5.objects.get(pk=p_id)
         form = FirstPairingForm()
-        p1 = [pairing.p11, pairing.p12, pairing.p13, pairing.p14, pairing.p15]
-        p2 = [pairing.p21, pairing.p22, pairing.p23, pairing.p24, pairing.p25]
-        p3 = [pairing.p31, pairing.p32, pairing.p33, pairing.p34, pairing.p35]
-        p4 = [pairing.p41, pairing.p42, pairing.p43, pairing.p44, pairing.p45]
-        p5 = [pairing.p51, pairing.p52, pairing.p53, pairing.p54, pairing.p55]
-        sum_p1 = sum(p1)
-        sum_p2 = sum(p2)
-        sum_p3 = sum(p3)
-        sum_p4 = sum(p4)
-        sum_p5 = sum(p5)
-        col1 = [pairing.p11, pairing.p21, pairing.p31, pairing.p41, pairing.p51]
-        col2 = [pairing.p12, pairing.p22, pairing.p32, pairing.p42, pairing.p52]
-        col3 = [pairing.p13, pairing.p23, pairing.p33, pairing.p43, pairing.p53]
-        col4 = [pairing.p14, pairing.p24, pairing.p34, pairing.p44, pairing.p54]
-        col5 = [pairing.p15, pairing.p25, pairing.p35, pairing.p45, pairing.p55]
-        sum_col1 = sum(col1)
-        sum_col2 = sum(col2)
-        sum_col3 = sum(col3)
-        sum_col4 = sum(col4)
-        sum_col5 = sum(col5)
-        tab_pairing_points = [
-            [p1, sum_p1],
-            [p2, sum_p2],
-            [p3, sum_p3],
-            [p4, sum_p4],
-            [p5, sum_p5],
-        ]
-        tab_col_points = [sum_col1, sum_col2, sum_col3, sum_col4, sum_col5]
+        players_points = []
+        army_points = []
+        for w in range(1, 6):
+            p1points = []
+            attr2 = f'player{w}'
+            attr3 = f'p{w}'
+            for z in range(1, 6):
+                attr1 = f'p{w}{z}'
+                j1 = getattr(pairing, attr1)
+                p1points.append(j1)
+            av1 = sum(p1points)
+            p1points.append(av1)
+            player_name = getattr(tournament, attr2)
+            player_army = getattr(tournament, attr3)
+            player_data = player_name, player_army
+            player_p = player_data, p1points
+            players_points.append(player_p)
+        for w in range(1, 6):
+            p2points = []
+            for z in range(1, 6):
+                attr2 = f'p{z}{w}'
+                j2 = getattr(pairing, attr2)
+                p2points.append(j2)
+            total2 = sum(p2points)
+            army_points.append(total2)
         teamA = [tournament.p1, tournament.p2, tournament.p3, tournament.p4, tournament.p5]
         teamB = [pairing.op1, pairing.op2, pairing.op3, pairing.op4, pairing.op5]
         all_pairings = []
@@ -159,8 +156,9 @@ class Pairing5v5View(View):
         ctx = {
             "tournament": tournament,
             "pairing": pairing,
-            "tab_pairing_points": tab_pairing_points,
-            "tab_col_points": tab_col_points,
+            "players_points": players_points,
+            "army_points": army_points,
+            "teamB": teamB,
             "form": form,
             "green": green,
             "yellow": yellow,
@@ -195,8 +193,43 @@ class Pairing5v5View(View):
             teamB2 = teamB.copy()
             teamB2.remove(first_op1)
             teamB2.remove(first_op2)
-
-
+            players_points = []
+            army_points = []
+            for w in range(1, 6):
+                p1points = []
+                if w == n1 or w == n2:
+                    pass
+                else:
+                    attr2 = f'player{w}'
+                    attr3 = f'p{w}'
+                    for z in range(1, 6):
+                        if z == no1 or z == no2:
+                            pass
+                        else:
+                            attr1 = f'p{w}{z}'
+                            j1 = getattr(pairing, attr1)
+                            p1points.append(j1)
+                    av1 = sum(p1points)
+                    p1points.append(av1)
+                    player_name = getattr(tournament, attr2)
+                    player_army = getattr(tournament, attr3)
+                    player_data = player_name, player_army
+                    player_p = player_data, p1points
+                    players_points.append(player_p)
+            for w in range(1, 6):
+                p2points = []
+                if w == no1 or w == no2:
+                    pass
+                else:
+                    for z in range(1, 6):
+                        if z == n1 or z == n2:
+                            pass
+                        else:
+                            attr2 = f'p{z}{w}'
+                            j2 = getattr(pairing, attr2)
+                            p2points.append(j2)
+                    total2 = sum(p2points)
+                    army_points.append(total2)
             all_pairings = []
             data_list = []
             for perm in permutations(teamA2):
@@ -236,6 +269,8 @@ class Pairing5v5View(View):
                 "first_op1": first_op1,
                 "first_p2": first_p2,
                 "first_op2": first_op2,
+                "players_points": players_points,
+                "army_points": army_points,
                 "green": green,
                 "yellow": yellow,
                 "red": red,
@@ -243,8 +278,7 @@ class Pairing5v5View(View):
                 "yellow_p": yellow_p,
                 "red_p": red_p,
                 "total": total,
-                "teamA2": teamA2,
-                "teamB2": teamB2,
+                "teamB": teamB2,
             }
             return render(request, "pairing5v5.html", ctx)
 

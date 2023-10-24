@@ -99,4 +99,3 @@ class FirstPairingForm(forms.Form):
     first_op1 = forms.ChoiceField(choices=BLANK_CHOICE + ARMIES_CHOICE, label="Dostawka przeciwników", widget=forms.Select(attrs={"class": "form-select mb-3"}))
     first_p2 = forms.ChoiceField(choices=BLANK_CHOICE + ARMIES_CHOICE, label="Dostawka", widget=forms.Select(attrs={"class": "form-select mb-3"}))
     first_op2 = forms.ChoiceField(choices=BLANK_CHOICE + ARMIES_CHOICE, label="Wystawka przeciwników", widget=forms.Select(attrs={"class": "form-select mb-3"}))
-

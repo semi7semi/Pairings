@@ -1,115 +1,50 @@
 {% extends "base.html" %}
-{% block title %} Dashboard {% endblock title %}
+{% block title %} Pairings {% endblock title %}
 {% block content %}
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">{{ tournament.name }} - Paring: {{ pairing.name}}</h6>
-                {% if request.method == 'GET' %}
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Op1 - {{ pairing.op1 }}</th>
-                        <th scope="col">Op2 - {{ pairing.op2 }}</th>
-                        <th scope="col">Op3 - {{ pairing.op3 }}</th>
-                        <th scope="col">Op4 - {{ pairing.op4 }}</th>
-                        <th scope="col">Op5 - {{ pairing.op5 }}</th>
+                        {% for op in teamB %}
+                        <th scope="col">{{ op }}</th>
+                        {% endfor %}
                         <th scope="col">suma</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {% for player in players_points %}
                     <tr>
-                        <th scope="row">{{ tournament.player1 }} - {{ tournament.p1 }}</th>
-                        {% for i in tab_pairing_points.0.0 %}
+                        <th scope="col">{{ player.0.0 }} - {{ player.0.1 }}</th>
+                        {% for i in player.1 %}
+                        {% if i == 0 %}
                         <td>{{ i }}</td>
+                        {% elif i < 0 %}
+                        <td class="text-danger">{{ i }}</td>
+                        {% elif i > 0 %}
+                        <td class="text-success">{{ i }}</td>
+                        {% endif %}
                         {% endfor %}
-                        <td>{{ tab_pairing_points.0.1 }}</td>
                     </tr>
+                    {% endfor %}
                     <tr>
-                        <th scope="row">{{ tournament.player2 }} - {{ tournament.p2 }}</th>
-                        {% for i in tab_pairing_points.1.0 %}
-                        <td>{{ i }}</td>
-                        {% endfor %}
-                        <td>{{ tab_pairing_points.1.1 }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{ tournament.player3 }} - {{ tournament.p3 }}</th>
-                        {% for i in tab_pairing_points.2.0 %}
-                        <td>{{ i }}</td>
-                        {% endfor %}
-                        <td>{{ tab_pairing_points.2.1 }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{ tournament.player4 }} - {{ tournament.p4 }}</th>
-                        {% for i in tab_pairing_points.3.0 %}
-                        <td>{{ i }}</td>
-                        {% endfor %}
-                        <td>{{ tab_pairing_points.3.1 }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{ tournament.player5 }} - {{ tournament.p5 }}</th>
-                        {% for i in tab_pairing_points.4.0 %}
-                        <td>{{ i }}</td>
-                        {% endfor %}
-                        <td>{{ tab_pairing_points.4.1 }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Suma</th>
-                        {% for col in tab_col_points %}
-                        {% if col == 0 %}
-                        <td>{{ col }}</td>
-                        {% elif col < 0 %}
-                        <td class="text-danger">{{ col }}</td>
-                        {% elif col > 0 %}
-                        <td class="text-success">{{ col }}</td>
+                        <th scope="col">suma op</th>
+                        {% for army in army_points %}
+                        {% if army == 0 %}
+                        <td>{{ army }}</td>
+                        {% elif army < 0 %}
+                        <td class="text-danger">{{ army }}</td>
+                        {% elif army > 0 %}
+                        <td class="text-success">{{ army }}</td>
                         {% endif %}
                         {% endfor %}
                     </tr>
                     </tbody>
                 </table>
-                {% endif %}
-                {% if request.method == 'POST' %}
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        {% for i in teamB2 %}
-                        <th scope="col">Op - {{ i }}</th>
-                        {% endfor %}
-                        <th scope="col">suma</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">{{ teamA2.0 }}}</th>
-                        <td>xx</td>
-                        <td>xx</td>
-                        <td>xx</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{ teamA2.1 }}}</th>
-                        <td>xx</td>
-                        <td>xx</td>
-                        <td>xx</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">{{ teamA2.2 }}}</th>
-                        <td>xx</td>
-                        <td>xx</td>
-                        <td>xx</td>
-                    </tr>
-
-                    <tr>
-                        <th scope="col">Suma</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </tbody>
-                </table>
-                {% endif %}
             </div>
         </div>
         {% if request.method == 'GET' %}
@@ -138,10 +73,51 @@
                 </form>
             </div>
         </div>
-        {% endif %}
+        {% else %}
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary rounded h-100 p-4">
-                {% if request.method == 'POST' %}
+            </div>
+        </div>
+        {% endif %}
+        <!--        <div class="container-fluid pt-4 px-4">-->
+        <!--            <div class="row g-4">-->
+        <!--                <div class="col-sm-12 col-xl-6">-->
+        <!--                    <div class="bg-secondary rounded h-100 p-4">-->
+        <!--                        <h6 class="mb-4">Pie Chart</h6>-->
+        <!--                        <canvas id="pie-chart"></canvas>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="col-sm-12 col-xl-6">-->
+        <!--                    <div class="bg-secondary rounded h-100 p-4">-->
+        <!--                        <h6 class="mb-4">Doughnut Chart</h6>-->
+        <!--                        <canvas id="doughnut-chart"></canvas>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Mozliwych parowań ({{ total }})</h6>
+                <table class="table table-borderless">
+                    <tr>
+                        <th class="text-success"> Dobrych parowań: {{ green_p|stringformat:"d%%" }} ({{ green }})</th>
+                        <th class="text-success"> 54 - 100 (65) pkt</th>
+                    </tr>
+                    <tr>
+                        <th class="text-warning"> Neutralnych parowań: {{ yellow_p|stringformat:"d%%" }} ({{ yellow }})
+                        </th>
+                        <th class="text-warning"> 47 - 53 pkt</th>
+                    </tr>
+                    <tr>
+                        <th class="text-danger"> Złych parowań: {{ red_p|stringformat:"d%%" }} ({{ red }})</th>
+                        <th class="text-danger"> 0 (35) - 46 pkt</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {% if request.method == 'POST' %}
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">Pierwsze pary:</h6>
                 <table class="table table-borderless">
                     <tr>
@@ -153,55 +129,10 @@
                         <th class="text-info bg-dark"> {{ first_p2 }} - {{ first_op2 }}</th>
                     </tr>
                 </table>
-                {% endif %}
-                <h6 class="mb-4">Mozliwych parowań ({{ total }})</h6>
-                <table class="table table-borderless">
-                    <tr>
-                        <th class="text-success"> Dobrych parowań: {{ green_p|stringformat:"d%%" }} ({{ green }})</th>
-                    </tr>
-                    <tr>
-                        <th class="text-warning"> Neutralnych parowań: {{ yellow_p|stringformat:"d%%" }} ({{ yellow }})
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="text-danger"> Złych parowań: {{ red_p|stringformat:"d%%" }} ({{ red }})</th>
-                    </tr>
-                </table>
             </div>
         </div>
-<!--        <div class="container-fluid pt-4 px-4">-->
-<!--            <div class="row g-4">-->
-<!--                <div class="col-sm-12 col-xl-6">-->
-<!--                    <div class="bg-secondary rounded h-100 p-4">-->
-<!--                        <h6 class="mb-4">Pie Chart</h6>-->
-<!--                        <canvas id="pie-chart"></canvas>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-sm-12 col-xl-6">-->
-<!--                    <div class="bg-secondary rounded h-100 p-4">-->
-<!--                        <h6 class="mb-4">Doughnut Chart</h6>-->
-<!--                        <canvas id="doughnut-chart"></canvas>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-                <table class="table table-borderless">
-                    <tr>
-                        <th class="text-success"> 54 - 100 (65) pkt</th>
-                    </tr>
-                    <tr>
-                        <th class="text-warning"> 47 - 53 pkt</th>
-                    </tr>
-                    <tr>
-                        <th class="text-danger"> 0 (35) - 46 pkt</th>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        {% endif %}
     </div>
 </div>
-
 
 {% endblock content %}
