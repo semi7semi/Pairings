@@ -47,7 +47,7 @@
                         <a class="btn btn-primary" href="{% url 'edit-5v5' tournament.id %}">Edytuj</a>
                     </button>
                     <!--                    <button type="button" class="btn btn-success m-2">Success</button>-->
-                    <button type="button" class="btn btn-danger m-2">
+                    <button type="button" class="btn btn-danger m-2" disabled>
                         <a class="btn btn-danger" href="{% url 'delete-5v5' tournament.id %}">Usuń</a>
                     </button>
                     <!--                    <button type="button" class="btn btn-warning m-2">Warning</button>-->
@@ -83,7 +83,7 @@
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger m-2">
+                            <button type="button" class="btn btn-danger m-2" >
                                 <a class="" href="{% url 'delete-pairing5v5' tournament.id pairing.id %}">Usuń</a>
                             </button>
                         </td>

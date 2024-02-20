@@ -197,7 +197,7 @@
                     "rgba(235, 22, 22, .6)",
                     "rgba(235, 22, 22, .5)",
                 ],
-                data: [1, 3, 5]
+                data: {{ chart_data|safe }}
             }]
         },
         options: {

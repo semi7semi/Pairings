@@ -1,6 +1,7 @@
 import json
 from itertools import permutations
 
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import FormView
@@ -9,14 +10,11 @@ from datetime import datetime
 from Tabelka.forms import Tournament5v5Form, Pairings5Form, FirstPairingForm
 from Tabelka.models import Tournaments5v5, Team_of_5
 
-HELLO_TEXT = "Witaj, dziala!"
 
 class Landing_page(View):
     def get(self, request):
-        text = HELLO_TEXT
         t5v5_list = Tournaments5v5.objects.all().order_by("-date")
         ctx = {
-            "text": text,
             "t5v5_list": t5v5_list,
         }
         return render(request, "index.html", ctx)
@@ -24,7 +22,7 @@ class Landing_page(View):
 
 class Index(View):
     def get(self, request):
-        pass
+        return render(request, "index.html")
 
 
 class AddTournament5v5View(View):
@@ -151,7 +149,8 @@ class Pairing5v5View(View):
         green_p = green / total * 100
         yellow_p = yellow / total * 100
         red_p = red / total * 100
-        # data = [green_p, yellow_p, red_p]
+        chart_data = [green_p, yellow_p, red_p]
+        print(chart_data)
 
         ctx = {
             "tournament": tournament,
@@ -167,7 +166,8 @@ class Pairing5v5View(View):
             "yellow_p": yellow_p,
             "red_p": red_p,
             "total": total,
-            # "data": json.dumps(data),
+            # "chart_data": chart_data,
+            "chart_data": json.dumps(chart_data),
         }
         return render(request, "pairing5v5.html", ctx)
 
@@ -261,6 +261,8 @@ class Pairing5v5View(View):
             green_p = green / total * 100
             yellow_p = yellow / total * 100
             red_p = red / total * 100
+            chart_data = [green_p, yellow_p, red_p]
+            print(chart_data)
 
             ctx = {
                 "tournament": tournament,
@@ -279,9 +281,9 @@ class Pairing5v5View(View):
                 "red_p": red_p,
                 "total": total,
                 "teamB": teamB2,
+                "chart_data": chart_data,
             }
             return render(request, "pairing5v5.html", ctx)
-
 
 class EditPairing5v5View(View):
     def get(self, request, id, p_id):

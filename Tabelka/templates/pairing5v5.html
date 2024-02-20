@@ -79,22 +79,6 @@
             </div>
         </div>
         {% endif %}
-        <!--        <div class="container-fluid pt-4 px-4">-->
-        <!--            <div class="row g-4">-->
-        <!--                <div class="col-sm-12 col-xl-6">-->
-        <!--                    <div class="bg-secondary rounded h-100 p-4">-->
-        <!--                        <h6 class="mb-4">Pie Chart</h6>-->
-        <!--                        <canvas id="pie-chart"></canvas>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <div class="col-sm-12 col-xl-6">-->
-        <!--                    <div class="bg-secondary rounded h-100 p-4">-->
-        <!--                        <h6 class="mb-4">Doughnut Chart</h6>-->
-        <!--                        <canvas id="doughnut-chart"></canvas>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">Mozliwych parowań ({{ total }})</h6>
@@ -113,8 +97,32 @@
                         <th class="text-danger"> 0 (35) - 46 pkt</th>
                     </tr>
                 </table>
+                <h6 class="mb-4">Wykres paringow</h6>
+                <canvas id="chart"></canvas>
             </div>
         </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+<!--            <canvas id="chart" width="500" height="500"></canvas>-->
+        <script>
+            let ctx = document.getElementById("chart").getContext("2d");
+            let chart = new Chart(ctx, {
+              type: "doughnut",
+                    data: {
+                        labels: ["Green", "Yellow", "Red"],
+                        datasets: [{
+                            backgroundColor: [
+                                "rgba(5, 130, 18, .7)",
+                                "rgba(245, 176, 15, .6)",
+                                "rgba(235, 22, 22, .5)",
+                            ],
+                            data: {{ chart_data|safe }}
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+        </script>
         {% if request.method == 'POST' %}
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary rounded h-100 p-4">
