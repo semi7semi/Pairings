@@ -47,9 +47,9 @@
                         <a class="btn btn-primary" href="{% url 'edit-5v5' tournament.id %}">Edytuj</a>
                     </button>
                     <!--                    <button type="button" class="btn btn-success m-2">Success</button>-->
-                    <button type="button" class="btn btn-danger m-2" disabled>
-                        <a class="btn btn-danger" href="{% url 'delete-5v5' tournament.id %}">Usuń</a>
-                    </button>
+<!--                    <button type="button" class="btn btn-danger m-2" disabled>-->
+<!--                        <a class="btn btn-danger" href="{% url 'delete-5v5' tournament.id %}">Usuń</a>-->
+<!--                    </button>-->
                     <!--                    <button type="button" class="btn btn-warning m-2">Warning</button>-->
                     <!--                    <button type="button" class="btn btn-info m-2">Info</button>-->
                     <!--                    <button type="button" class="btn btn-light m-2">Light</button>-->
@@ -79,14 +79,14 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary m-2">
-                                <a class="" href="{% url 'edit-pairing5v5' tournament.id pairing.id %}">Edytuj</a>
+                                <a href="{% url 'edit-pairing5v5' tournament.id pairing.id %}">Edytuj</a>
                             </button>
                         </td>
-                        <td>
-                            <button type="button" class="btn btn-danger m-2" >
-                                <a class="" href="{% url 'delete-pairing5v5' tournament.id pairing.id %}">Usuń</a>
-                            </button>
-                        </td>
+<!--                        <td>-->
+<!--                            <button type="button" class="btn btn-danger m-2" disabled>-->
+<!--                                <a class="" href="{% url 'delete-pairing5v5' tournament.id pairing.id %}">Usuń</a>-->
+<!--                            </button>-->
+<!--                        </td>-->
                     </tr>
                     {% endfor %}
                     </tbody>
@@ -162,6 +162,7 @@
                         </tr>
                     </table>
                     <input class="btn btn-primary" type="submit" value="Zapisz nowy paring">
+
                     {% csrf_token %}
                 </form>
             </div>
