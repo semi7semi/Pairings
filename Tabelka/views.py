@@ -102,11 +102,12 @@ class Pairing5v5View(View):
                 j1 = getattr(pairing, attr1)
                 p1points.append(j1)
             av1 = sum(p1points)
-            p1points.append(av1)
+            # p1points.append(av1)
+            # usunalem sume z tabeli player.1 i dodalem dodatkowa w player.2
             player_name = getattr(tournament, attr2)
             player_army = getattr(tournament, attr3)
             player_data = player_name, player_army
-            player_p = player_data, p1points
+            player_p = player_data, p1points, av1
             players_points.append(player_p)
         for w in range(1, 6):
             p2points = []

@@ -29,17 +29,25 @@
                         <td class="text-success">{{ i }}</td>
                         {% endif %}
                         {% endfor %}
+<!--                        suma-->
+                        {% if player.2 == 0 %}
+                        <td class="h5">{{ player.2 }}</td>
+                        {% elif player.2 < 0 %}
+                        <td class="text-danger h5">{{ player.2 }}</td>
+                        {% elif player.2 > 0 %}
+                        <td class="text-success h5">{{ player.2 }}</td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                     <tr>
                         <th scope="col">suma op</th>
                         {% for army in army_points %}
                         {% if army == 0 %}
-                        <td>{{ army }}</td>
+                        <td class="h5">{{ army }}</td>
                         {% elif army < 0 %}
-                        <td class="text-danger">{{ army }}</td>
+                        <td class="text-danger h5">{{ army }}</td>
                         {% elif army > 0 %}
-                        <td class="text-success">{{ army }}</td>
+                        <td class="text-success h5">{{ army }}</td>
                         {% endif %}
                         {% endfor %}
                     </tr>
