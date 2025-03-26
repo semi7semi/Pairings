@@ -150,7 +150,6 @@ class Pairing5v5View(View):
         yellow_p = yellow / total * 100
         red_p = red / total * 100
         chart_data = [green_p, yellow_p, red_p]
-        print(chart_data)
 
         ctx = {
             "tournament": tournament,
